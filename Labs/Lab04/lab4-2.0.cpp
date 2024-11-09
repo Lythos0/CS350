@@ -4,6 +4,7 @@
 using namespace std;
 #ifndef LAB4_2_0_H 
 #define LAB4_2_0_H
+
 class Account{
 private:
 double balance;
