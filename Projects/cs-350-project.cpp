@@ -24,3 +24,35 @@ string select_puzzle(){
     return puzzles[random_index];
 }
 
+void display(const string& puzzle, int selected_digit) {
+    cout << "Game Grid:" << endl;
+
+    for (size_t i = 0; i < puzzle.size(); i++) {
+        if (i % 9 == 0 && i != 0) cout << endl;
+        cout << puzzle[i] << " ";
+    }
+    cout << endl << endl;
+
+    cout << "Digit List: ";
+    for (int i = 1; i <= 9; i++) {
+        if (i == selected_digit)
+            cout << "[" << i << "] "; 
+        else
+            cout << i << " ";
+    }
+    cout << endl;
+}
+
+void select_digit(int& selected_digit) {
+    cout << "Enter a digit to select (1-9): ";
+    cin >> selected_digit;
+
+    if (selected_digit < 1 || selected_digit > 9) {
+        cout << "Invalid selection. Defaulting to digit 1." << endl;
+        selected_digit = 1;
+    }
+}
+
+
+
+
