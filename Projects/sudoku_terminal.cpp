@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <vector>
 #include <stack>
@@ -193,10 +194,10 @@ void Initialize(string puzzles[5][2]) {
         display(selected_puzzle, selected_digit); // Show puzzle grid
 
         // Prompt user for an action
-        cout << "Welcome to the Sudoku Puzzle League! Please select an option: (S to select a digit, P to populate a cell, U to undo): ";
+        cout << "Welcome to the Sudoku Puzzle League! Please select an option: (S to select a digit, P to populate a cell, U to undo, Q to quit): ";
         cin >> action;
 
-        // Handle user input for selecting a digit, populating a cell, or undoing a move
+        // Handle user input for selecting a digit, populating a cell, undoing a move, or quitting the game
         if (action == 'S' || action == 's') {
             cout << "Enter the digit to select: ";
             cin >> selected_digit; 
@@ -209,6 +210,9 @@ void Initialize(string puzzles[5][2]) {
             populate_cell(selected_puzzle, row, col, selected_digit); // Populate cell with selected digit
         } else if (action == 'U' || action == 'u') {
             undo(selected_puzzle); // Undo the last move
+        } else if (action == 'Q' || action == 'q') {
+            cout << "Thanks for playing the game! See ya!" << endl;
+            break; // Exit the game loop
         } else {
             cout << "Invalid option. Please try again!" << endl;
         }
