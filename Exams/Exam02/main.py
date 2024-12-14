@@ -1,4 +1,86 @@
 #Define Classes Below Here
+class BalanceManager:
+    _count = 0
+    def __init__(self, amount=0.0):
+        if amount < 0:
+            self._amount = 0.0
+        else:
+            self._amount = float(amount)
+        BalanceManager._count += 1
+        
+    @staticmethod
+    def total_accounts():
+        return BalanceManager._count
+
+    def possible_deposit(self, amount):
+        return True
+
+    def possible_withdraw(self, amount):
+        return True
+
+    def deposit(self, amount):
+        if amount >= 0 and self.possible_deposit(amount):
+            self._amount += amount
+            return True
+        return False
+
+    def withdraw(self, amount):
+        if amount >= 0 and self.possible_withdraw(amount):
+            self._amount -= amount
+            return True
+        return False
+
+    def balance(self):
+        return self._amount
+
+    def __str__(self):
+        return f"Balance: {self._amount:.2f} USD"
+
+class BalanceManagerWithDailyTurnOver(BalanceManager):
+    def __init__(self, amount=0.0, maximum=5000.0):
+        super().__init__(amount)
+        self._current = 0.0
+        if maximum < 0:
+            self._maximum = 5000.0
+        else:
+            self._maximum = float(maximum)
+
+    def possible_transaction(self, amount):
+        return self._current + amount <= self._maximum
+
+    def possible_deposit(self, amount):
+        return self.possible_transaction(amount)
+
+    def possible_withdraw(self, amount):
+        return self.possible_transaction(amount)
+
+    def deposit(self, amount):
+        if super().deposit(amount):
+            self._current += amount
+            return True
+        return False
+
+    def withdraw(self, amount):
+        if super().withdraw(amount):
+            self._current += amount
+            return True
+        return False
+
+    def turnover(self):
+        return self._current
+
+    def adjustment(self, maximum):
+        if maximum >= self._current:
+            self._maximum = maximum
+             def reset(self):
+        self._current = 0.0
+
+    def __str__(self):
+        return (f"Balance: {self._amount:.2f} USD\n"
+                f"Turnover: {self._current:.2f} USD\n"
+                f"Limit: {self._maximum:.2f} USD")
+
+
 
 #Define Classes Above Here
 
